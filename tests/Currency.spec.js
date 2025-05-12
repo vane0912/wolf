@@ -43,7 +43,7 @@ test('Different currency', async ({ page }) => {
   await expect(name_applicant).toBeVisible()
   await name_applicant.fill('Test')
 
-  const last_name = page.getByPlaceholder("Smith")
+  const last_name = page.getByPlaceholder("Smith").first()
   await last_name.fill('Test')
 
   const dob_day = page.locator('[name="applicant.0.dob.day"]')
