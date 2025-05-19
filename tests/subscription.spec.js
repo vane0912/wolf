@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, email_test, Orders} = require('./urls');
+const {deploy_url, email_test} = require('./urls');
 
 test.skip('Purchase Subscription', async({ page }) => {
     for(let i = 0; 2 > i; i++){

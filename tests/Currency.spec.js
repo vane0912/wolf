@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, email_test, Orders} = require('./urls');
+const {deploy_url, email_test} = require('./urls');
 
 test('Different currency', async ({ page }) => {
   await page.goto(deploy_url + 'a/turkey');
@@ -106,7 +106,6 @@ test('Different currency', async ({ page }) => {
   
   await page.waitForNavigation({waitUntil: 'load'})
 
-  Orders.push(page.url().split("/")[4]) 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
 

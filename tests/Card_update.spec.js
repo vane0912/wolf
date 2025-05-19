@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, email_test, Orders} = require('./urls');
+const {deploy_url, email_test} = require('./urls');
 
 test('Card update', async ({ page }) => {
     await page.goto(deploy_url + 'account/payment-method')
