@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url, email_test} = require('./urls');
+const {deploy_url} = require('./urls');
 
 test('Different currency', async ({ page }) => {
   await page.goto(deploy_url + 'a/turkey');
