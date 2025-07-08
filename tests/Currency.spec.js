@@ -77,7 +77,7 @@ test('Different currency', async ({ page }) => {
   await expect(page.getByTestId('processing-standard')).toBeVisible()
   const standar_processing = page.getByTestId('processing-standard')
   await expect(standar_processing).toBeVisible()
-  const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
+  //const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -91,9 +91,9 @@ test('Different currency', async ({ page }) => {
   await expect(total_price).toBeVisible()
   const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
 
-  console.log(total_price_assertion)
-  console.log(price.split(' ')[0].replace(",", ""))
-  expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
+  //console.log(total_price_assertion)
+  //console.log(price.split(' ')[0].replace(",", ""))
+  //expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()

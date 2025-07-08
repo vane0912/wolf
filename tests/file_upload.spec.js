@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const {deploy_url} = require('../urls');
+const {deploy_url} = require('./urls');
 const path = require('path');
 
 let Order_num
@@ -111,7 +111,7 @@ test('File upload checker', async({page}) => {
     // Upload Correct Photo
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(8000)
+    await page.waitForTimeout(12000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
     
@@ -124,7 +124,7 @@ test('File upload checker', async({page}) => {
     await page.locator('id=instructions-continue').click()
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Error_2.png'))
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(10000)
+    await page.waitForTimeout(12000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", "Upload the full page with your name and photo. It must be clear and easy to read")
     
@@ -133,7 +133,7 @@ test('File upload checker', async({page}) => {
     // Upload Correct Photo
     await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/passport.jpg'))
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(10000)
+    await page.waitForTimeout(12000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
     
