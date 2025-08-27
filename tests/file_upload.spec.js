@@ -84,6 +84,7 @@ test('File upload checker', async({page}) => {
     await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
+    await page.getByTestId("transition-page-button").click()
     Order_num = page.url().split("/")[4] 
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
@@ -94,24 +95,82 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(1000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
+    await page.waitForTimeout(2000)
+    await page.getByTestId('boolean-Male').click()
+    await page.locator('[name="applicant.0.birth_city"]').fill('aaaaaaaaa')
+
+    const religion = page.locator('[name="applicant.0.religion"]');
+    
+    await expect(religion).toBeVisible();
+    await religion.click()
+    const input_religion = page.getByTestId('dropdown-applicant.0.religion');
+    await expect(input_religion).toBeVisible();
+    await input_religion.fill('bahai');
+    await page.getByRole("option", {name: 'Bahai'}).click()
+    await page.waitForTimeout(1000)
+
+    await page.getByTestId('boolean-Married').click()
+    
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
+    
+    await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
+    await page.waitForTimeout(2000)
+    await page.keyboard.press("Space")
+    await page.waitForTimeout(1000)
+    await page.keyboard.press("Enter")
+    await page.waitForTimeout(1000)
+    await page.locator('//li[@data-place-id="ChIJ49W-BhhawokR4KLCF2oTVVo"]').click()
+
+    await page.waitForTimeout(1000)
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_work")
+
+    await page.waitForTimeout(2000)
+    const employment = page.locator('[name="applicant.0.occupation"]');
+    await expect(employment).toBeVisible();
+    await employment.click()
+    const input_employment = page.getByTestId('dropdown-applicant.0.occupation');
+    await expect(input_employment).toBeVisible();
+    await input_employment.fill('retired');
+    await page.getByRole("option", {name: 'Retired'}).click()
+    await page.waitForTimeout(1000)
+
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
+    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_family")
+
+    await page.locator('[name="applicant.0.fathers_name"]').fill("test")
+    await page.locator('[name="applicant.0.mothers_name"]').fill("test")
+    await page.locator('[name="applicant.0.spouse_first_last_name"]').fill("test")
+
+    await expect(next_btn).toBeEnabled()
+    await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
+
     // Confirm instructions appear Applicant photo
-    await expect(page.locator("id=document-step")).toContainText("Applicant's photo", "Let's upload your photo", "Face the camera straight on with a plain background.", "No glasses, hats, or scarves", "No smiling.", "It must be different")
+    await expect(page.locator("id=document-step")).toContainText("Applicant's Photo", "Upload your photo", "Face the camera straight on with a plain background.", "No angles or head tilts ", "No glasses, hats, or scarves", "No glasses, hats, or scarves")
     
     // Upload wrong file Applicant photo
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Error_1.png'))
+
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_1.png'));
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(8000)
+    await page.waitForTimeout(14000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", " The photo must be clear and in focus", " Don't wear a hat", " Don't wear glasses", "Watch tutorial")
-
+    
     await page.getByTestId("acceptFileUploadBtn").click()
 
     // Upload Correct Photo
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Applicant-Photo.jpg'));
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(12000)
+    await page.waitForTimeout(14000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
     
@@ -122,18 +181,20 @@ test('File upload checker', async({page}) => {
     
     // Upload wrong file Passport photo
     await page.locator('id=instructions-continue').click()
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/Error_2.png'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/Error_2.png'));
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(12000)
+    await page.waitForTimeout(10000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Let's try that again", "Upload the full page with your name and photo. It must be clear and easy to read")
     
     await page.getByTestId("acceptFileUploadBtn").click()
     
     // Upload Correct Photo
-    await page.locator('input[type="file"]').nth(2).setInputFiles(path.join(__dirname, 'uploads_passport/passport.jpg'))
+    await page.getByTestId("try-another-way-button").click()
+    await page.setInputFiles('input[type="file"]', path.join(__dirname, 'uploads_passport/passport.jpg'));
     await expect(page.locator("id=document-loading")).toBeVisible()
-    await page.waitForTimeout(12000)
+    await page.waitForTimeout(10000)
     await expect(page.locator("id=document-loading")).toBeHidden()
     await expect(page.locator("id=document-step")).toContainText("Your upload passed our initial review!", "One of our experts will do a final review to ensure it meets all requirements. If it doesn't, we’ll contact you. ", "Don't like it? ", "You can take a new one")
     

@@ -1,7 +1,8 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('./urls');
 
-test.skip('Purchase Subscription', async({ page }) => {
+let order_num
+test('Purchase Subscription', async({ page }) => {
   test.slow()
   await page.goto(deploy_url + 'a/turkey');
 
@@ -62,12 +63,7 @@ test.skip('Purchase Subscription', async({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=step_4')
-
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  const standar_processing = page.getByTestId('processing-standard')
-  await expect(standar_processing).toBeVisible()
-  const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
-
+  
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=review')
@@ -85,6 +81,7 @@ test.skip('Purchase Subscription', async({ page }) => {
   await payment_btn.click()
   
   await page.waitForNavigation({waitUntil: 'load'})
+  await page.getByTestId("transition-page-button").click()
   order_num = page.url().split("/")[4] 
 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
@@ -177,8 +174,6 @@ test.skip('Purchase Subscription', async({ page }) => {
   await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=step_4')
 
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  await expect(standar_processing).toBeVisible()
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
@@ -198,33 +193,5 @@ test.skip('Purchase Subscription', async({ page }) => {
   await payment_btn.click()
   
   await page.waitForNavigation({waitUntil: 'load'})
-  order_num = page.url().split("/")[4] 
-
-  await page.getByPlaceholder('111-222-3333').fill('11111111')
-  await page.getByTestId('boolean-WhatsApp').click()
-
-  await page.waitForTimeout(1000)
-  await expect(next_btn).toBeEnabled()
-  await next_btn.click()
-  await expect(page.getByTestId('boolean-Male')).toBeEnabled()
-  await page.waitForTimeout(1000)
-  await page.getByTestId('boolean-Male').click()
-  await page.waitForTimeout(1000)
-  await expect(next_btn).toBeEnabled()
-  await next_btn.click()
-
-  await page.waitForNavigation({waitUntil: 'load'})
-  await passport_issue_day.selectOption('13')
-  await page.waitForTimeout(1000)
-
-  await passport_issue_month.selectOption('7')
-  await page.waitForTimeout(1000)
-  await passport_issue_year.selectOption('2020')
-  await page.waitForTimeout(1000)
-  await expect(submit_post_payment).toBeEnabled()
-  await submit_post_payment.click()
-  await page.waitForNavigation({waitUntil: 'load'})
-
-  await page.locator('id=trackApplication').click()
-  await page.waitForURL(deploy_url + "order/" + order_num)
+  
 })

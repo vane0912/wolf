@@ -103,7 +103,7 @@ test('Different currency', async ({ page }) => {
   await payment_btn.click()
   
   await page.waitForNavigation({waitUntil: 'load'})
-
+  await page.getByTestId("transition-page-button").click()
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
 

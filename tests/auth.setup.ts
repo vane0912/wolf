@@ -58,17 +58,25 @@ setup('authenticate', async ({ page }) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/a/turkey#step=step_3c')
+
+    const dropdown_country_step3c = page.locator('[name="applicant.0.nationality_country"]');
+    await expect(dropdown_country_step3c).toBeVisible();
+    await dropdown_country_step3c.click();
+    const input_country_3c = page.getByTestId('dropdown-applicant.0.nationality_country');
+    await expect(input_country_3c).toBeVisible();
+    await input_country_3c.fill('Mexico');
+    await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
     
     const passport_num = page.locator('[name="applicant.0.passport_num"]')
-  await expect(passport_num).toBeVisible()
-  await passport_num.fill('123456789')
-  const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
-  await passport_day.selectOption('13')
-  const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
-  await passport_month.selectOption('7')
-  const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
-  await passport_year.selectOption('2030')
-  await page.waitForTimeout(4000)
+    await expect(passport_num).toBeVisible()
+    await passport_num.fill('123456789')
+    const passport_day = page.locator('[name="applicant.0.passport_expiration_date.day"]')
+    await passport_day.selectOption('13')
+    const passport_month = page.locator('[name="applicant.0.passport_expiration_date.month"]')
+    await passport_month.selectOption('7')
+    const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
+    await passport_year.selectOption('2030')
+    await page.waitForTimeout(4000)
 
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
