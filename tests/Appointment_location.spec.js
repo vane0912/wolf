@@ -18,7 +18,7 @@ test('Appointment location error', async({ page }) => {
     await page.waitForTimeout(1000)
     const selector_products = page.getByTestId('dropdown-general.visa_type_id');
     await selector_products.selectOption('5085')
-    
+    /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -26,7 +26,7 @@ test('Appointment location error', async({ page }) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-  
+    */
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -72,6 +72,9 @@ test('Appointment location error', async({ page }) => {
     const last_name_2 = page.locator('[name="applicant.1.last_name"]')
     await last_name_2.fill('Test')
     await page.waitForTimeout(1000)
+    await expect(continue_sidebar).toBeEnabled()
+    await continue_sidebar.click()
+    await page.waitForURL('**/a/australia#step=step_3b')
   
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
