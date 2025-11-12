@@ -13,7 +13,7 @@ test('Purchase Subscription', async({ page }) => {
   await expect(input_country).toBeVisible();
   await input_country.fill('Mexico');
   await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  
+  /*
   const selector_products = page.getByTestId('dropdown-general.visa_type_id');
   await selector_products.selectOption('38')
   /*
@@ -25,6 +25,17 @@ test('Purchase Subscription', async({ page }) => {
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
   */
   const continue_sidebar = page.locator('id=btnContinueSidebar')
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/a/turkey#step=step_2')
+
+  const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+  await expect(arrival_date_visible).toBeVisible()
+  await arrival_date_visible.click()
+  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
+  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=step_3a')
@@ -86,24 +97,24 @@ test('Purchase Subscription', async({ page }) => {
 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('boolean-WhatsApp').click()
-
+  /*
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
   await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-
+  */
   const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
-  /*
+  
   await expect(page.getByTestId('boolean-Male')).toBeEnabled()
   await page.waitForTimeout(1000)
   await page.getByTestId('boolean-Male').click()
   await page.waitForTimeout(1000)
-  */
+  
   await page.waitForTimeout(3000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()
@@ -146,7 +157,7 @@ test('Purchase Subscription', async({ page }) => {
   await expect(input_country).toBeVisible();
   await input_country.fill('Mexico');
   await page.getByRole("option", {name: 'Mexico flag Mexico'}).click()
-  
+  /*
   await selector_products.selectOption('38')
   /*
   await expect(arrival_date_visible).toBeVisible()
@@ -155,6 +166,16 @@ test('Purchase Subscription', async({ page }) => {
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '12'}).first().click()
   */
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/a/turkey#step=step_2')
+
+  await expect(arrival_date_visible).toBeVisible()
+  await arrival_date_visible.click()
+  await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+  await page.locator('[data-dp-element="action-next"]').click()
+  await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=step_3a')
