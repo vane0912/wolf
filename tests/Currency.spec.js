@@ -90,7 +90,7 @@ test('Different currency', async ({ page }) => {
   }
   const total_price = page.getByTestId('order-total')
   await expect(total_price).toBeVisible()
-  const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
+  //const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
 
   //console.log(total_price_assertion)
   //console.log(price.split(' ')[0].replace(",", ""))
@@ -99,6 +99,14 @@ test('Different currency', async ({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   const payment_btn = page.locator('id=btnSubmitPayment')
+  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
+  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
+
+  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+  await expiration_month.fill('10/26')
+
+  const cvv = stripeFrame.locator("id=Field-cvcInput")
+  await cvv.fill('123')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()

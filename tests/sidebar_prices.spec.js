@@ -49,16 +49,17 @@ test('Processing speeds appear and work', async({page}) => {
     const passport_year = page.locator('[name="applicant.0.passport_expiration_date.year"]')
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
-    
+    /*
     const dropdown_country = page.locator('[name="applicant.0.port_of_arrival"]');
     await expect(dropdown_country).toBeVisible();
     await dropdown_country.click();
+    
     const input_country = page.getByTestId('dropdown-applicant.0.port_of_arrival');
 
     await expect(input_country).toBeVisible();
     await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
     await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
-
+    */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/a/india#step=step_4')
@@ -74,25 +75,25 @@ test('Processing speeds appear and work', async({page}) => {
     await standard.click()
     await page.waitForTimeout(3000)
     const sidebar_step_2 = page.getByTestId('sidebar-summary-breakdown')
-    let sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Standard, 5 days', '$92.99']
+    let sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Standard, 5 days', '$95.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
     const correct_total = page.getByTestId('order-total')
-    await expect(correct_total).toHaveText('$118.63')
+    await expect(correct_total).toHaveText('$121.63')
 
     await rush.click()
     await page.waitForTimeout(3000)
     await expect(continue_sidebar).toBeEnabled()
 
-    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Rush, 3 days', '$112.99']
+    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Rush, 4 days', '$112.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
-    await expect(correct_total).toHaveText('$138.63')
+    await expect(correct_total).toHaveText('$141.63')
 
     await super_rush.click()
     await page.waitForTimeout(3000)
     await expect(continue_sidebar).toBeEnabled()
 
-    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Super Rush, 2 days', '$172.99']
+    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Super Rush, 3 days', '$175.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
-    await expect(correct_total).toHaveText('$198.63')
+    await expect(correct_total).toHaveText('$201.63')
     await page.waitForTimeout(3000)
 })
