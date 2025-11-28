@@ -92,6 +92,8 @@ test('File upload checker', async({page}) => {
 
     const cvv = stripeFrame.locator("id=Field-cvcInput")
     await cvv.fill('123')
+    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
     await payment_btn.click()
@@ -149,7 +151,7 @@ test('File upload checker', async({page}) => {
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_residency_information_after_payment")
     
-    await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123')
+    await page.getByPlaceholder('1234 Sesame St. Apt. 3, Springtown, IL 55555').fill('123 william')
     await page.waitForTimeout(2000)
     await page.keyboard.press("Space")
     await page.waitForTimeout(1000)
@@ -178,6 +180,7 @@ test('File upload checker', async({page}) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_family")
+    await page.waitForTimeout(2000)
     /*
     await page.locator('[name="applicant.0.fathers_name"]').fill("test")
     await page.locator('[name="applicant.0.mothers_name"]').fill("test")

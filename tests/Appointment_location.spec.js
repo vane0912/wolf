@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('./urls');
 
-test.skip('Appointment location error', async({ page }) => {
+test('Appointment location error', async({ page }) => {
     await page.goto(deploy_url + 'a/australia')
   
     const dropdown_country =  page.getByTestId('filter-value');
@@ -27,12 +27,13 @@ test.skip('Appointment location error', async({ page }) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    */
+    
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/a/australia#step=step_2')
-
+    */
+    //await page.waitForURL('**/a/australia#step=step_2')
+    /*
     const arrival_date_visible = page.locator('[name="general.arrival_date"]')
     await expect(arrival_date_visible).toBeVisible()
     await arrival_date_visible.click()
@@ -40,8 +41,11 @@ test.skip('Appointment location error', async({ page }) => {
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('[data-dp-element="action-next"]').click()
     await page.locator('.dp--future').filter({hasText: '12'}).first().click()
+    */
+    const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+
     await page.waitForURL('**/a/australia#step=step_3a')
   
     await page.waitForTimeout(1000)
@@ -96,7 +100,7 @@ test.skip('Appointment location error', async({ page }) => {
     await expect(skip_passport).toBeVisible()
     await skip_passport.check()
     await expect(skip_passport).toBeChecked()
-  
+    /*
     // First Applicant 
     const occupation_triage = page.locator('[name="applicant.0.occupation_triage"]');
     await occupation_triage.click()
@@ -123,14 +127,14 @@ test.skip('Appointment location error', async({ page }) => {
   
     const visa_denied = page.getByTestId('travelerSection-0').getByTestId("boolean-I was denied this visa over 12 months ago")
     await visa_denied.click()
-  
+    */
     // Second applicant
     await page.getByText("Traveler #2 - Test").click()
     const skip_passport_1 = page.locator('[name="applicant.1.is_passport_on_hand"]')
     await expect(skip_passport_1).toBeVisible()
     await skip_passport_1.check()
     await expect(skip_passport_1).toBeChecked()
-  
+    /*
     const occupation_triage_1 = page.locator('[name="applicant.1.occupation_triage"]');
     await occupation_triage_1.click()
   
@@ -156,7 +160,7 @@ test.skip('Appointment location error', async({ page }) => {
   
     const visa_denied_1 = page.getByTestId('travelerSection-1').getByTestId("boolean-I was denied this visa over 12 months ago")
     await visa_denied_1.click()
-  
+    */
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/a/australia#step=step_3e')

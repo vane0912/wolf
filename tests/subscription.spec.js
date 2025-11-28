@@ -75,10 +75,6 @@ test('Purchase Subscription', async({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/a/turkey#step=step_4')
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=review')
   await page.waitForTimeout(2000)
   const duplicate = await page.isVisible('id=btnDisclaimerNext')
@@ -86,8 +82,6 @@ test('Purchase Subscription', async({ page }) => {
     await page.locator('id=btnDisclaimerNext').click()
   }
 
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   const payment_btn = page.locator('id=btnSubmitPayment')
   const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
   await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
@@ -97,6 +91,8 @@ test('Purchase Subscription', async({ page }) => {
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+  await zip_code.fill('12345')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
@@ -217,21 +213,11 @@ test('Purchase Subscription', async({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/a/turkey#step=step_4')
-
-
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=review')
   await page.waitForTimeout(2000)
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
-
-  await expect(continue_sidebar).toBeEnabled()
-  
-  await continue_sidebar.click()
-
   await expect(page.locator('.card-body')).toContainText("Your iVisa+ Subscription covers the total cost of your application")
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()

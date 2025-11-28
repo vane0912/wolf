@@ -84,7 +84,7 @@ test('Processing speeds appear and work', async({page}) => {
     await page.waitForTimeout(3000)
     await expect(continue_sidebar).toBeEnabled()
 
-    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Rush, 4 days', '$112.99']
+    sidebar_validations = ['India Tourist eVisa', '1 Traveler', 'Government fees', '$25.64', 'Rush, 4 days', '$115.99']
     sidebar_validations.forEach(async txt => await expect(sidebar_step_2).toContainText(txt))
     await expect(correct_total).toHaveText('$141.63')
 

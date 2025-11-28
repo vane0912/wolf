@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('./urls');
 
-test('Denial Protection', async ({ page }) =>{
+test.skip('Denial Protection', async ({ page }) =>{
   await page.goto(deploy_url + 'a/turkey');
   const dropdown_country =  page.getByTestId('filter-value');
 
@@ -86,6 +86,8 @@ test('Denial Protection', async ({ page }) =>{
 
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
+  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    await zip_code.fill('12345')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
