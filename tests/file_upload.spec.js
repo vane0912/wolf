@@ -93,7 +93,7 @@ test('File upload checker', async({page}) => {
     const cvv = stripeFrame.locator("id=Field-cvcInput")
     await cvv.fill('123')
     const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('12345')
+    await zip_code.fill('WS111DB')
     await expect(payment_btn).toBeVisible()
     await expect(payment_btn).toBeEnabled()
     await payment_btn.click()

@@ -92,7 +92,7 @@ test('Purchase Subscription', async({ page }) => {
   const cvv = stripeFrame.locator("id=Field-cvcInput")
   await cvv.fill('123')
   const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-  await zip_code.fill('12345')
+  await zip_code.fill('WS111DB')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
@@ -141,7 +141,7 @@ test('Purchase Subscription', async({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-
+  await page.locator("skip-recommendation-button").click()
   await page.locator('id=trackApplication').click()
   await page.waitForURL(deploy_url + "order/" + order_num)
 
@@ -222,7 +222,6 @@ test('Purchase Subscription', async({ page }) => {
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
-  
   await page.waitForNavigation({waitUntil: 'load'})
   
 })
