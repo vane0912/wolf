@@ -74,16 +74,16 @@ test('Different currency', async ({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   
-  //await page.waitForURL('**/a/turkey#step=step_4')
-  /*
+  await page.waitForURL('**/a/turkey#step=step_4')
+  
   await expect(page.getByTestId('processing-standard')).toBeVisible()
   const standar_processing = page.getByTestId('processing-standard')
   await expect(standar_processing).toBeVisible()
-  //const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
+  const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  */
+  
   await page.waitForURL('**/a/turkey#step=review')
   await page.waitForTimeout(2000)
   const duplicate = await page.isVisible('id=btnDisclaimerNext')
@@ -92,15 +92,15 @@ test('Different currency', async ({ page }) => {
   }
   const total_price = page.getByTestId('order-total')
   await expect(total_price).toBeVisible()
-  //const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
+  const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
 
-  //console.log(total_price_assertion)
-  //console.log(price.split(' ')[0].replace(",", ""))
-  //expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
-  /*
+  console.log(total_price_assertion)
+  console.log(price.split(' ')[0].replace(",", ""))
+  expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
+  
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  */
+  
   const payment_btn = page.locator('id=btnSubmitPayment')
   const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
   await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');

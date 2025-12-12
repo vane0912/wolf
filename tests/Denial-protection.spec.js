@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('./urls');
 
-test.skip('Denial Protection', async ({ page }) =>{
+test('Denial Protection', async ({ page }) =>{
   await page.goto(deploy_url + 'a/turkey');
   const dropdown_country =  page.getByTestId('filter-value');
 
