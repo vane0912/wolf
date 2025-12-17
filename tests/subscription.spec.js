@@ -75,6 +75,12 @@ test('Purchase Subscription', async({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
+  await page.waitForURL('**/a/turkey#step=step_4')
+  
+  await expect(page.getByTestId('processing-standard')).toBeVisible()
+
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=review')
   await page.waitForTimeout(2000)
   const duplicate = await page.isVisible('id=btnDisclaimerNext')
@@ -211,6 +217,11 @@ test('Purchase Subscription', async({ page }) => {
   await passport_year.selectOption('2030')
   await page.waitForTimeout(4000)
 
+  await expect(continue_sidebar).toBeEnabled()
+  await continue_sidebar.click()
+  await page.waitForURL('**/a/turkey#step=step_4')
+  
+  await expect(page.getByTestId('processing-standard')).toBeVisible()
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=review')

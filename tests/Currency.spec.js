@@ -77,10 +77,7 @@ test('Different currency', async ({ page }) => {
   await page.waitForURL('**/a/turkey#step=step_4')
   
   await expect(page.getByTestId('processing-standard')).toBeVisible()
-  const standar_processing = page.getByTestId('processing-standard')
-  await expect(standar_processing).toBeVisible()
-  const price = await standar_processing.filter({has: page.locator('span')}).first().textContent()
-
+  
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   
