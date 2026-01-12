@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('./urls');
+const {newPaymentCheckout} = require('./functions');
+
 const path = require('path');
 
 let Order_num
@@ -69,34 +71,13 @@ test('File upload checker', async({page}) => {
     await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
     */
     await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    await page.waitForURL('**/a/india#step=step_4')
-
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    await page.waitForURL('**/a/india#step=review')
-    await page.waitForTimeout(2000)
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
-    if (duplicate){
-      await page.locator('id=btnDisclaimerNext').click()
-    }
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-
-    const payment_btn = page.locator('id=btnSubmitPayment')
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-    await expiration_month.fill('10/26')
-
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
-    await cvv.fill('123')
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('WS111DB')
-    await expect(payment_btn).toBeVisible()
-    await expect(payment_btn).toBeEnabled()
-    await payment_btn.click()
+  await continue_sidebar.click()
+  
+  await newPaymentCheckout(page,"**/a/india#", '6011 1111 1111 1117', '123')
+  const payment_btn = page.locator('id=btnSubmitPayment')
+  await expect(payment_btn).toBeVisible()
+  await expect(payment_btn).toBeEnabled()
+  await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()

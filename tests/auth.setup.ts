@@ -1,5 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
 import {deploy_url, email_test} from './urls'
+import {newPaymentCheckout} from './functions'
 import fs from 'fs';
 import path from 'path';
 
@@ -79,36 +80,9 @@ setup('authenticate', async ({ page }) => {
     await passport_year.selectOption('2030')
     await page.waitForTimeout(4000)
     await continue_sidebar.click()
-
-    await page.waitForURL('**/a/turkey#step=step_4')
-
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-    await page.waitForURL('**/a/turkey#step=review')
-    await page.waitForTimeout(2000)
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
-    if (duplicate){
-      await page.locator('id=btnDisclaimerNext').click()
-    }
-    const denial_protection = page.getByRole('checkbox')
-    await denial_protection.check() 
-    await expect(denial_protection).toBeChecked()
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
+    await newPaymentCheckout(page,"**/a/turkey#", '6011 1111 1111 1117', '123')
     const payment_btn = page.locator('id=btnSubmitPayment')
-    
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    
-    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-    await expiration_month.fill('10/26')
-
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
-    await cvv.fill('123')
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('WS111DB')
+  
     await payment_btn.click()
 
     await page.waitForNavigation({waitUntil: 'load'})
