@@ -127,6 +127,7 @@ test('Purchase Subscription', async({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
+  await page.waitForTimeout(3000)
   await page.locator("skip-recommendation-button").click()
   await page.locator('id=trackApplication').click()
   await page.waitForURL(deploy_url + "order/" + order_num)

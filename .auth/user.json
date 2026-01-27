@@ -1,0 +1,237 @@
+{
+  "cookies": [
+    {
+      "name": "default_currency",
+      "value": "USD",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sabp",
+      "value": "10135",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nationalityFromPassport",
+      "value": "MX",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "eafu",
+      "value": "1693eyJpdiI6Ik93dThoMVJlS25TZlJFNDhXZ2tBOWc9PSIsInZhbHVlIjoiZ0E1VGc1eHJKSmZGT1VKMVdtTlp1cVJPN0RXRGFIRHRCTWtVdEZzQitGMzJsM0xraWJiajVhZnZPZmFVL0VlVjBKb1JzODdqQjlQV2hRMmNKd1VDalE9PSIsIm1hYyI6ImQzMzU4NWQ4MmY4ZTY5NDNiNTkzNmI2ZGRiODFjNmY3MDA2MDMxZjc4Yjk2MTQ0ODExMTM3YWY2NGUyNGFkNWIiLCJ0YWciOiIifQ%3D%3D",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103515.725465,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "m",
+      "value": "353f4bb0-11c0-48a3-b025-05cd48af0ce6b1d66b",
+      "domain": "m.stripe.com",
+      "path": "/",
+      "expires": 1804103519.7815,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__stripe_mid",
+      "value": "f87c1f5f-0ec4-4c9c-959a-4ba24a85c17aedc177",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1801079520,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "__stripe_sid",
+      "value": "7cd10683-5380-4c22-a272-c4b44a8af2fd13770e",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1769545320,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "Tl9QZWCz8yBEfuyj1qnpmhPrSigc2YiPoKe4mH41yjE-1769543519-1.0.1.1-ulnzyW1W3y._XV4QFTM5At9eOdA7sLg9NpgQyS5IJD2BMOdahv5wv_4_l5gKtG_irIqwRpJcs.VD3kpF3QGQ6onp4BSesWPP9PaisDLIb3E",
+      "domain": ".hcaptcha.com",
+      "path": "/",
+      "expires": 1769545319.844171,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d",
+      "value": "1693eyJpdiI6ImtXMEdqZXBlY2Zpb0dHRUlBWWdPd2c9PSIsInZhbHVlIjoiaTZQWjJ2MitpNGRJbjcxa1drampkR05GVWRteVdnTk9FL1B4QXh5UTJ0L3V2M2tlaW5MWXJiUjE2RThwRDg0VEJkZnZ5VkRZVU1vNThua2hSMEI3RVY2MDZvQ1JVM1lNcFFmS2Mxemo0SnBOVFhSOWZEbnFDNU04VU1tRGxWSm4rVVUvQTFaVW5EejFsYnd2d3hKY3puN0ZWRWM0a29EeXFFalZRdHJYbmVyWnR3cjRWd25vNk5sS2NwbXBrUHFoVlhlUWRySFBUSHRiblNNU3cyNkNSOGNiRkJ6QStFS1V2NGZTeUFFL3phVT0iLCJtYWMiOiJhYzllNWE1MmE3ZjExNGM4NzhjZmEwZDJiMWMwMGVmMTczY2Q5ZTczOWIxNDU4ODNlNDFhN2YwYzc1Y2RiMGEyIiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103523.772261,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "last_auth",
+      "value": "1693eyJpdiI6ImJsVStXcU5aK2NVaFk1bU13Y2doeUE9PSIsInZhbHVlIjoiSmhhZjd1djZ5eW9sMGV4VEkrU0dzbWw4RnNjZlBkS2JxWnNuMXVzSVFYbm0zQVExNjR6c3hSTGlZbGl5V2RZRmNjWFpUS2poRjlQeldydzEvMkFDbGc9PSIsIm1hYyI6IjUzODM2OTIyNzgxMTY4ZDE5MzllN2JiZjg1MTk0MjQ4NTJjMGFjZTBiNWRlMDAwNjJiOGQ4MzQwMmQwMGM3YWMiLCJ0YWciOiIifQ%3D%3D",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1769975523.772314,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ceui",
+      "value": "1693eyJpdiI6IkdxQVdiNkRST1BwOUVXU2NlWGZQNHc9PSIsInZhbHVlIjoiV2Q4R1kvbkFwb2M1ZUVhOW5rbmFreEJrSVhUMzQ4ZDV6bHJEVnFGdFN1eTNaMFpXSWozdEcwdUFsTFJIc3ZyL0VaZERYNCt5ZjJxSGpDWTIxTVBidlFuams3MDRiMnlZTnlNcml1czFLRW1QYWZxQjJUcFJVTzZnZEtSaVJBWkpUSnBVTHR4MWYvcHBmc3U2Qk9IWDUreFFyeTZ5cnEvclpDYUxtSnk2a2NzPSIsIm1hYyI6IjhhZDNiOTk1MmI2ODM2ODRhY2U3MjkzYTg2NDJmNzljZmJmOTJhMTI1NDkwYTlhNWQwZTg4YjVlNjljYWMwZDIiLCJ0YWciOiIifQ%3D%3D",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103529.596867,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ceul",
+      "value": "1693eyJpdiI6IjJyek9YeHRRNlJuMWg2ZkR2eG9UM2c9PSIsInZhbHVlIjoic1ljc2R2Y09uRzdXcGFoTUhEWkhobmJUNXQ0dEFqbmE3aDM2cTJKSTIrR3lHdk80RTgrdVg3Z3Z2blVUVUVJUTJMa084dmllbmloOGU2c0FwejVnNjZGaU5Zb01yMmlQNjRCOFBZZThGWlhVbXpxQ09QaVJQaCtUYks3NHhIK3ZZTFVGdlBlZDZ0MnVpRy9vMFhVT0VxZ0kzRjVOTC9jY0dpblFWQTE0ZnVGZzJ5Q004K25zeDA5NmdXU2s0YWRyIiwibWFjIjoiZGI0ODY1ZWZhMWZkOTBmNTJjNTc1Mzg3Yjk1NDgzNGNjNGNjYmRkNWNmYzY4YTAwYjA0NWEzYTAyODZlMjgzYiIsInRhZyI6IiJ9",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103530.014976,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sess",
+      "value": "1693eyJpdiI6IlBjZmJIZWtRYlNzZ1Irc0tnYjB3TlE9PSIsInZhbHVlIjoidzNVMVEzVkhnMzV2cy9tVW5QTG04VTRQVzZnYURsaytKbnEvb3B5RkowdWxmQmFKOFNiQVFiVUkwdUFIRnNnLzRralVyQzVDR2dxNHFYRUVVUGFjUTdQUFAza1l1K2xNS3piTFhadnFhdlVINXJTZXNBOVRQaFpWa1c2clRnV0kiLCJtYWMiOiI3MGMwZGRlNGI3ODI3MWI5MTYzZTNjYjA0YjQ3NTRhMzdiN2U2ZjNjMjI0ZmYzNjVjZDMyYWZkN2EwN2E3MjIyIiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "path": "/",
+      "expires": 1769673130.176292,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nationalityFromPassport",
+      "value": "US",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "default_currency",
+      "value": "USD",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sess",
+      "value": "1693eyJpdiI6Ik43ckhNdDFqYzVhUXQyUTFmWVVRdlE9PSIsInZhbHVlIjoiRFpCdk01RGpIb2xibFRTUE00bHVRenA3T29xZDhpT0o4b2xDL2NidDJFZGExU2p2UEdYM2hqUGk3czZsM3RlNVFFa0dvZnNwYitnRDREVXJJSzU0U3pwQlhINzZveGpUcGp6aStINWJnQktKL21mMEF6WElYdXFnZmgzbHpXSFoiLCJtYWMiOiJiNjNhMzJlZWM2MjE4YzI4NjM4NWNkNTc3NDA3NWUwMTBhN2M0NDEyY2ZkMTI1YTJhYjIxNDQwNzlhMmI3OTI2IiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": 1769673131.293087,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ceui",
+      "value": "1693eyJpdiI6ImMrTzJLN2RUT3EwNEhpTUtzSFZINVE9PSIsInZhbHVlIjoiaktUdVFiMmNsNFRHbFdmL045dGJobC84SGttQmlEQWkzU3U4SWMySFZuQkViSlJwSHVuQzRwUVVKdGhkcGxuOUJoc0ZWblByVEErNmx3RHRwL0Nqb2FiVGxvM1J3c212L1FVZDQrWkJVMmtxbW5qT1pma2krcjR5aWJXcVZpZElzTnlPSEVjSm5iUm00NFlDN054T0ZBPT0iLCJtYWMiOiJkMjczMDgwY2NmZTFmMWVkNWQ3YWUxOGYwNGEwMzZlZWE0OGYyMjhkYjRjMGFiYmM4ZWU3NDdmNmRkYjg2YjdjIiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103531.293215,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ceul",
+      "value": "1693eyJpdiI6ImFWRm52SkQ5WmZ2amJRbUxIdmxBSkE9PSIsInZhbHVlIjoiL1NJTGM2bm01MVM2Szg2Ukx1NEN6TDU3WS81aXlYN2RIUkZvQnU2MUFxWWtuamVJd3JacHY3eG5IeVhpMjhnSmk3eWU0RkRtTkNvV2JwWG1ZU2F6c0l2U3I3QWUyeWM1VTRJSzg5L0pBVjZUSUF5ZFdjdWhlWERETFVVOTQ1TENOY2NuSE5lMVRubFRGR2hMODdneUl3PT0iLCJtYWMiOiJlMzI0ZmJiMjIyMzA5OWE5YmYzZjg5ZjlkZTYzMmViM2I1NThhNzI1MTUwOWIwYTJmNWY2N2I0NGQwM2ZhZTgxIiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103531.293267,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "runn",
+      "value": "1693eyJpdiI6IjhNQzNVQ2NSTUNoMVAxYWR5WldBanc9PSIsInZhbHVlIjoiV3VMb0h0MHRRdHJua1M3QUIwTVBCVlpqYlJxVlNtYlIxTE5uL2tsdjFMMldQVkdSTzl2SmxHNHU4M0tVZVlOb0lMTk81K3hUNDFXS0FNeU13WGg2ZU94WUNuTzZmcU5mRm90Z2hodEZ6Smx5eE5sb2NLV09tWkNmWFZlbkQyajAwanJOcnFuTk1ibVFSb2ZFV0RocVZBPT0iLCJtYWMiOiI5ZmI4ZDE4NzRkOTU5MmZiNzFhNjY3NmI0MDYwY2Y3ODZjZDEyNjZlZDMzYjA1YjI4ZjIyYTViNzRlNDIyYmFlIiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103531.293321,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "crel",
+      "value": "1693eyJpdiI6Ild1V09RUVlxTG9TbzM0enZkS3JkYlE9PSIsInZhbHVlIjoiUkhpMVVTOW0wOGJ0bUNIK2ZnV2NCblFHdHd6VEhyZGorMm5NWGJCUzh6ZWZhK0EwUEtzcXVDdmRvNUJFVExwdzZ5OERPTEo3N1R4dDRORGV1U1lzVXpqQ0ZaY3R3dFF3d2s0c0x4eXBkUllyTXdjYXlMcFBWZEhaNERGTUUrV2JmRmxJMmw1czMrNHJMalVPRDlsbDZRPT0iLCJtYWMiOiJhMzdlYjQ3Nzk1ZDIzZWMwMjg1MTU1YmViODExMjY4ODBhZDU5MDU3YjYwYWYyY2E0YjgzMGExMjc2NDJmMjYxIiwidGFnIjoiIn0%3D",
+      "domain": ".deploy-20260128--3038f3ca.visachinaonline.com",
+      "path": "/",
+      "expires": 1804103531.293368,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://deploy-20260128--3038f3ca.ivisatravel.visachinaonline.com",
+      "localStorage": [
+        {
+          "name": "pusherTransportTLS",
+          "value": "{\"timestamp\":1769543529691,\"transport\":\"ws\",\"latency\":237,\"cacheSkipCount\":0}"
+        }
+      ]
+    },
+    {
+      "origin": "https://b.stripecdn.com",
+      "localStorage": [
+        {
+          "name": "__klarna_sdk_version",
+          "value": "{\"ttl\":\"1769629921401\",\"rolloutVariant\":\"none\",\"version\":\"1.0.171\"}"
+        }
+      ]
+    },
+    {
+      "origin": "https://pay.google.com",
+      "localStorage": [
+        {
+          "name": "pf.keys",
+          "value": "[\"allowed_payment_methods.https://b.stripecdn.com\"]"
+        },
+        {
+          "name": "allowed_payment_methods.https://b.stripecdn.com",
+          "value": "{\"value\":\"[{\\\"type\\\":\\\"CARD\\\",\\\"parameters\\\":{\\\"allowedAuthMethods\\\":[\\\"PAN_ONLY\\\",\\\"CRYPTOGRAM_3DS\\\"],\\\"allowedCardNetworks\\\":[\\\"AMEX\\\",\\\"DISCOVER\\\",\\\"JCB\\\",\\\"MASTERCARD\\\",\\\"VISA\\\"]}}]\",\"e\":1769544121161}"
+        }
+      ]
+    }
+  ]
+}

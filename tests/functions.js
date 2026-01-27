@@ -7,14 +7,14 @@ async function newPaymentCheckout(page,url,creditCard, cvvNum){
     }
     const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
     
-    await stripeFrame.locator("id=Field-numberInput").fill(creditCard);
+    await stripeFrame.locator("id=payment-numberInput").fill(creditCard);
 
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
+    const expiration_month = stripeFrame.locator("id=payment-expiryInput")
     await expiration_month.fill('10/26')
 
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
+    const cvv = stripeFrame.locator("id=payment-cvcInput")
     await cvv.fill(cvvNum)
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
+    const zip_code = stripeFrame.locator("id=payment-postalCodeInput")
     await zip_code.fill('12345')
     /*
     const cardholder_name = page.getByPlaceholder("Cardholder name")
