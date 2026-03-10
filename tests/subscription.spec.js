@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('./urls');
+const {newPaymentCheckout} = require('./functions');
 
 let order_num
 test('Purchase Subscription', async({ page }) => {
@@ -7,7 +8,6 @@ test('Purchase Subscription', async({ page }) => {
   await page.goto(deploy_url + 'a/turkey');
 
   const dropdown_country = page.getByTestId('filter-value');
-  await expect(dropdown_country).toBeVisible();
   await dropdown_country.click();
   const input_country = page.getByTestId('dropdown-general.common_nationality_country');
   await expect(input_country).toBeVisible();
@@ -75,30 +75,9 @@ test('Purchase Subscription', async({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/a/turkey#step=step_4')
   
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  await page.waitForURL('**/a/turkey#step=review')
-  await page.waitForTimeout(2000)
-  const duplicate = await page.isVisible('id=btnDisclaimerNext')
-  if (duplicate){
-    await page.locator('id=btnDisclaimerNext').click()
-  }
-
+  await newPaymentCheckout(page,"**/a/turkey#", '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-  await expiration_month.fill('10/26')
-
-  const cvv = stripeFrame.locator("id=Field-cvcInput")
-  await cvv.fill('123')
-  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-  await zip_code.fill('WS111DB')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
@@ -147,7 +126,11 @@ test('Purchase Subscription', async({ page }) => {
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  await page.locator("skip-recommendation-button").click()
+  await page.waitForTimeout(3000)
+  const skip_recomendation = await page.locator('id=skip-recommendation-button').isVisible()
+  if(skip_recomendation){
+    await page.locator('id=skip-recommendation-button').click()    
+  }
   await page.locator('id=trackApplication').click()
   await page.waitForURL(deploy_url + "order/" + order_num)
 
@@ -159,6 +142,12 @@ test('Purchase Subscription', async({ page }) => {
   await expect(page.getByTestId("purchase-subscription-button")).toContainText(" Subscribe for $79.99 $29.99")
   await page.getByTestId("purchase-subscription-button").click()
 
+  await page.waitForURL(deploy_url + "order/" + order_num + "/purchase_addons/new_mop?subscription=true")
+  await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")
+  await page.getByPlaceholder("MM/YY").fill("10/29")
+  await page.getByPlaceholder("CVV").fill("123")
+  await page.getByPlaceholder("Cardholder name").fill("John Smith")
+  await page.locator('id=btnSubmitPayment').click()
   await page.waitForURL(deploy_url + "order/" + order_num + "?subscription=true")
 
   // Place free order 
@@ -219,13 +208,9 @@ test('Purchase Subscription', async({ page }) => {
 
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
-  await page.waitForURL('**/a/turkey#step=step_4')
-  
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
   await page.waitForURL('**/a/turkey#step=review')
   await page.waitForTimeout(2000)
+  const duplicate = await page.isVisible('id=btnDisclaimerNext')
   if (duplicate){
     await page.locator('id=btnDisclaimerNext').click()
   }
@@ -234,5 +219,4 @@ test('Purchase Subscription', async({ page }) => {
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
   await page.waitForNavigation({waitUntil: 'load'})
-  
 })

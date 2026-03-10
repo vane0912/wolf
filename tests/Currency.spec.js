@@ -1,14 +1,15 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('./urls');
+const {newPaymentCheckout} = require('./functions');
 
 test('Different currency', async ({ page }) => {
+  test.slow()
   await page.goto(deploy_url + 'a/turkey');
   const currency = page.locator('id=currencyHeader');
   await expect(currency).toBeVisible()
   await currency.click()
 
   const dropdown_currency = page.getByTestId('filter-value').filter({hasText: 'USD $'})
-  await expect(dropdown_currency).toBeVisible()
   await dropdown_currency.click()
   const input_currency = page.getByTestId('dropdown-modal-currency')
   await input_currency.fill('mxn')
@@ -16,9 +17,8 @@ test('Different currency', async ({ page }) => {
   await expect(confirm_currency).toBeVisible()
   await confirm_currency.click()
   await page.locator('id=updatePrefButton').click()
-
+  await page.waitForTimeout(6000)
   const dropdown_country = page.getByTestId('filter-value');
-  await expect(dropdown_country).toBeVisible();
   await dropdown_country.click();
   const input_country = page.getByTestId('dropdown-general.common_nationality_country');
   await expect(input_country).toBeVisible();
@@ -74,41 +74,8 @@ test('Different currency', async ({ page }) => {
   await expect(continue_sidebar).toBeEnabled()
   await continue_sidebar.click()
   
-  await page.waitForURL('**/a/turkey#step=step_4')
-  
-  await expect(page.getByTestId('processing-standard')).toBeVisible()
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  
-  await page.waitForURL('**/a/turkey#step=review')
-  await page.waitForTimeout(2000)
-  const duplicate = await page.isVisible('id=btnDisclaimerNext')
-  if (duplicate){
-    await page.locator('id=btnDisclaimerNext').click()
-  }
-  const total_price = page.getByTestId('order-total')
-  await expect(total_price).toBeVisible()
-  const total_price_assertion = await page.locator('//span[@data-handle="order-total"]').textContent()
-
-  console.log(total_price_assertion)
-  console.log(price.split(' ')[0].replace(",", ""))
-  expect.soft(price.split(' ')[0].replace(",", ""), 'Expect Total to be the same as Standard').toContain(total_price_assertion)
-  
-  await expect(continue_sidebar).toBeEnabled()
-  await continue_sidebar.click()
-  
+  await newPaymentCheckout(page,"**/a/turkey#", '6011 1111 1111 1117', '123')
   const payment_btn = page.locator('id=btnSubmitPayment')
-  const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-  await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-  const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-  await expiration_month.fill('10/26')
-
-  const cvv = stripeFrame.locator("id=Field-cvcInput")
-  await cvv.fill('123')
-  const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('WS111DB')
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()

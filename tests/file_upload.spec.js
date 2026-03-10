@@ -1,5 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const {deploy_url} = require('./urls');
+const {newPaymentCheckout} = require('./functions');
+
 const path = require('path');
 
 let Order_num
@@ -23,7 +25,6 @@ test('File upload checker', async({page}) => {
     await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
     await page.locator('.dp--future').filter({hasText: date1}).first().click()
     */
-    await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/a/india#step=step_3a')
   
@@ -69,34 +70,13 @@ test('File upload checker', async({page}) => {
     await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
     */
     await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    await page.waitForURL('**/a/india#step=step_4')
-
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    await page.waitForURL('**/a/india#step=review')
-    await page.waitForTimeout(2000)
-    const duplicate = await page.isVisible('id=btnDisclaimerNext')
-    if (duplicate){
-      await page.locator('id=btnDisclaimerNext').click()
-    }
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-
-    const payment_btn = page.locator('id=btnSubmitPayment')
-    const stripeFrame = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(1)
-    await stripeFrame.locator("id=Field-numberInput").fill('6011 1111 1111 1117');
-
-    const expiration_month = stripeFrame.locator("id=Field-expiryInput")
-    await expiration_month.fill('10/26')
-
-    const cvv = stripeFrame.locator("id=Field-cvcInput")
-    await cvv.fill('123')
-    const zip_code = stripeFrame.locator("id=Field-postalCodeInput")
-    await zip_code.fill('WS111DB')
-    await expect(payment_btn).toBeVisible()
-    await expect(payment_btn).toBeEnabled()
-    await payment_btn.click()
+  await continue_sidebar.click()
+  
+  await newPaymentCheckout(page,"**/a/india#", '6011 1111 1111 1117', '123')
+  const payment_btn = page.locator('id=btnSubmitPayment')
+  await expect(payment_btn).toBeVisible()
+  await expect(payment_btn).toBeEnabled()
+  await payment_btn.click()
     
     await page.waitForNavigation({waitUntil: 'load'})
     await page.getByTestId("transition-page-button").click()
@@ -104,12 +84,6 @@ test('File upload checker', async({page}) => {
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('boolean-WhatsApp').click()
-    
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('.dp--future').filter({hasText: date1}).first().click()
     
     const religion = page.locator('[name="general.religion"]');
     
@@ -126,6 +100,13 @@ test('File upload checker', async({page}) => {
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=travel_general")   
+
+    await page.waitForTimeout(2000)
+    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
+    await expect(arrival_date_visible).toBeVisible()
+    await arrival_date_visible.click()
+    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
+    await page.locator('.dp--future').filter({hasText: date1}).first().click()
     
     const dropdown_country_arrival = page.locator('[name="general.port_of_arrival"]');
     await expect(dropdown_country_arrival).toBeVisible();
@@ -135,6 +116,13 @@ test('File upload checker', async({page}) => {
     await expect(input_country).toBeVisible();
     await input_country.fill('Ahmedabad Airport - Ahmedabad - AMD');
     await page.locator('//div[@value="Ahmedabad Airport - Ahmedabad - AMD"]').click()
+
+    const country_before_india =  page.getByTestId('filter-value').nth(1);
+    await country_before_india.click();
+    const select_country = page.getByTestId('dropdown-general.ten_years_countries.0.country_where_boarded');
+
+    await select_country.fill('united states');
+    await page.getByRole("option", {name: 'United States flag United States'}).click()
 
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
@@ -188,14 +176,6 @@ test('File upload checker', async({page}) => {
     await page.waitForTimeout(2000)
     await expect(next_btn).toBeEnabled()
     await next_btn.click()
-
-    await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_travel")
-    await page.waitForTimeout(2000)
-    await page.getByTestId("boolean-No").first().click()
-    await page.waitForTimeout(2000)
-    await expect(next_btn).toBeEnabled()
-    await next_btn.click()
-    
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_documents")
 
     // Confirm instructions appear Applicant photo

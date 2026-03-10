@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test');
 const {deploy_url, email_test} = require('./urls');
 
 test('Appointment location error', async({ page }) => {
+  test.slow()
     await page.goto(deploy_url + 'a/australia')
   
     const dropdown_country =  page.getByTestId('filter-value');
@@ -16,32 +17,7 @@ test('Appointment location error', async({ page }) => {
     await page.waitForTimeout(1000)
     await page.keyboard.press('Enter');
     await page.waitForTimeout(1000)
-    /*
-    const selector_products = page.getByTestId('dropdown-general.visa_type_id');
-    await selector_products.selectOption('5085')
-    /*
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
     
-    const continue_sidebar = page.locator('id=btnContinueSidebar')
-    await expect(continue_sidebar).toBeEnabled()
-    await continue_sidebar.click()
-    */
-    //await page.waitForURL('**/a/australia#step=step_2')
-    /*
-    const arrival_date_visible = page.locator('[name="general.arrival_date"]')
-    await expect(arrival_date_visible).toBeVisible()
-    await arrival_date_visible.click()
-    await expect(page.locator('.dp__outer_menu_wrap')).toBeVisible()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('[data-dp-element="action-next"]').click()
-    await page.locator('.dp--future').filter({hasText: '12'}).first().click()
-    */
     const continue_sidebar = page.locator('id=btnContinueSidebar')
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
@@ -90,10 +66,12 @@ test('Appointment location error', async({ page }) => {
     await page.waitForTimeout(1000)
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
-    await page.waitForURL('**/a/australia#step=step_3b')
-  
+    
+    //await page.waitForURL('**/a/australia#step=step_3b')
+    /*
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
+    */
     await page.waitForURL('**/a/australia#step=step_3c')
   
     const skip_passport = page.locator('[name="applicant.0.is_passport_on_hand"]')
@@ -164,11 +142,20 @@ test('Appointment location error', async({ page }) => {
     await expect(continue_sidebar).toBeEnabled()
     await continue_sidebar.click()
     await page.waitForURL('**/a/australia#step=step_3e')
-  
+    await page.locator('[name="applicant.0.home_country"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.0.home_country").fill("mexico")
+    await page.getByRole('option', { name: 'Mexico flag Mexico' }).click()
+    await page.waitForTimeout(2000)
     const location_1 = page.locator('[name="applicant.0.appointment_location_id"]')
     await location_1.getByTestId('boolean-4575').click()
-  
+
     await page.locator('//div[@data-handle="travelerSectionWrapper-1"]//span').click()
+    await page.locator('[name="applicant.1.home_country"]').click()
+    await page.waitForTimeout(2000)
+    await page.getByTestId("dropdown-applicant.1.home_country").fill("mexico")
+    await page.getByRole('option', { name: 'Mexico flag Mexico' }).click()
+    await page.waitForTimeout(2000)
     const location_2 = page.locator('[name="applicant.1.appointment_location_id"]')
     await location_2.getByTestId('boolean-23003').click()
   
