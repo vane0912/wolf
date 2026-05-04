@@ -3,7 +3,7 @@ const {deploy_url, email_test} = require('./urls');
 
 test('Card update', async ({ page }) => {
     await page.goto(deploy_url + 'account/payment-method')
-    await expect(page.getByTestId("updatePaymentMethodBtn")).toBeEnabled()
+    await expect(page.getByTestId("addPaymentMethodBtn")).toBeEnabled()
   
     await page.goto(deploy_url + 'account/payment-method/edit')
     await page.getByPlaceholder("Card number").fill("4556 7610 2998 3886")

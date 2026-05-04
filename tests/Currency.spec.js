@@ -42,7 +42,11 @@ test('Different currency', async ({ page }) => {
   await expect(payment_btn).toBeVisible()
   await expect(payment_btn).toBeEnabled()
   await payment_btn.click()
-
+  await page.waitForTimeout(5000)
+  const dsModal = await page.locator('primer-portal-dialog').isVisible()
+  if(dsModal){
+    await page.frameLocator(".challenge-iframe").getByText('Pass challenge').click()
+  }
   
   await page.waitForNavigation({waitUntil: 'load'})
   await page.getByTestId("transition-page-button").click()
@@ -68,17 +72,6 @@ test('Different currency', async ({ page }) => {
   await next_btn.click()
 
   await page.waitForNavigation({waitUntil: 'load'})
-  const passport_issue_day = page.locator('[name="applicant.0.passport_issued_date.day"]')
-  await passport_issue_day.selectOption('13')
-  await page.waitForTimeout(1000)
-
-  const passport_issue_month = page.locator('[name="applicant.0.passport_issued_date.month"]')
-  await passport_issue_month.selectOption('7')
-  await page.waitForTimeout(1000)
-  const passport_issue_year = page.locator('[name="applicant.0.passport_issued_date.year"]')
-  await passport_issue_year.selectOption('2020')
-  await page.waitForTimeout(1000)
-
   const submit_post_payment = page.locator('id=btnSubmitApplication')
   await expect(submit_post_payment).toBeEnabled()
   await submit_post_payment.click()
