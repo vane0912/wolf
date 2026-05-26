@@ -54,13 +54,13 @@ test('Magic login link', async ({ page,browser }) => {
     });
     const email = await context.newPage();
     await email.goto(deploy_url + 'mail')
-    await email.getByText("Here's your automatic login link").first().click()
+    await email.getByText("Log in to your iVisa account").first().click()
     await expect(email.locator(".messageHeaders")).toBeVisible()
     await expect(email.locator(".messageHeaders")).toContainText(email_test)
     const iframe = email.frameLocator('iframe');
     const [newTab] = await Promise.all([
       email.context().waitForEvent('page'),
-      iframe.getByText('Log in').click(),
+      iframe.getByRole('link', { name: 'Log in', exact: true }).click(),
     ]);
 
     await newTab.waitForLoadState()

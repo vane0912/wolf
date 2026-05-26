@@ -54,7 +54,12 @@ test('Different currency', async ({ page }) => {
 
   await page.getByPlaceholder('111-222-3333').fill('11111111')
   await page.getByTestId('option-WhatsApp').click()
-  
+
+  const next_btn = page.locator('id=btnContinueUnderSection')
+  await page.waitForTimeout(1000)
+  await expect(next_btn).toBeEnabled()
+  await next_btn.click()
+
   const arrival_date_visible = page.locator('[name="general.arrival_date"]')
   await expect(arrival_date_visible).toBeVisible()
   await arrival_date_visible.click()
@@ -62,7 +67,6 @@ test('Different currency', async ({ page }) => {
   await page.locator('[data-dp-element="action-next"]').click()
   await page.locator('.dp--future').filter({hasText: '2'}).first().click()
   
-  const next_btn = page.locator('id=btnContinueUnderSection')
   await page.waitForTimeout(1000)
   await expect(next_btn).toBeEnabled()
   await next_btn.click()

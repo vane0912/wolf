@@ -32,7 +32,7 @@ async function newPaymentCheckout(page,creditCard, cvvNum,continuebtn){
 
 async function autofillExisting(page, url, nationality, subscription) {
     if(subscription){
-        await page.getByRole("radio").nth(2).click()
+        await page.getByRole("radio").nth(1).click()
     }else{
         await page.getByRole("radio").nth(0).click()
     }

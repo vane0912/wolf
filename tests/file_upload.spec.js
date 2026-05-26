@@ -31,15 +31,7 @@ test('File upload checker', async({page}) => {
 
     await page.getByPlaceholder('111-222-3333').fill('11111111')
     await page.getByTestId('option-WhatsApp').click()
-    
-    const religion = page.locator('[name="general.religion"]');
-    
-    await expect(religion).toBeVisible();
-    await religion.click()
-    const input_religion = page.getByTestId('dropdown-general.religion');
-    //await expect(input_religion).toBeVisible();
-    await input_religion.fill('bahai');
-    await page.getByRole("option", {name: 'Bahai'}).click()
+
   
     // File upload step
     const next_btn = page.locator('id=btnContinueUnderSection')
@@ -73,6 +65,10 @@ test('File upload checker', async({page}) => {
     await next_btn.click()
     await page.waitForURL(deploy_url + "order/" + Order_num + "/continue#step=trav0_personal")    
     await page.waitForTimeout(2000)
+    await page.locator("[name='applicant.0.religion']").click()
+    const input_religion = page.getByTestId('dropdown-applicant.0.religion');
+    await input_religion.fill('bahai');
+    await page.getByRole("option", {name: 'Bahai'}).click()
     await page.getByTestId('option-Male').click()
     await page.getByTestId('option-Married').click()
     
